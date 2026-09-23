@@ -72,3 +72,17 @@ tags:
 。。。。。。。。。。。。。。。。。。。。。。。。。
 
 ![](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/22/97c93a3b7062f715d24c4a15c4a5f2b5-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-22%20212302.png)
+
+
+
+**Pass03**
+
+传入.php文件后发现：
+
+![屏幕截图 2026-09-23 213939](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/23/4e5f8af4f923ebc682f34aadf8da1036-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-23%20213939.png)
+
+试验之后发现.pphphp，.php3，.php5，.phtml都行
+
+-然后发现使用蚁剑连不上，查看上传文件才知道文件被重命名了
+
+![屏幕截图 2026-09-23 220154](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/23/233c1d09981c88b874bd9312da75e85a-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-23%20220154.png)
