@@ -3,8 +3,8 @@ title: upload-labs做题记录
 date: 2026-09-22 20:05:21
 tags:
 - Web
-- 文件上传漏洞
-- 靶场实战
+  - 文件上传漏洞
+    - 靶场实战
 ---
 
 **upload-labs靶场通关**
