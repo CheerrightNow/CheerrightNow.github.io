@@ -311,3 +311,51 @@ fuzz一下，没发现有用的东西。
 成功。
 
 ![image-20260927115134452](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/27/868fc6ae48a82c5adc5793965a7b94e5-image-20260927115134452.png)
+
+
+
+**pass08**
+
+fuzz一下发现“pass08.php.”上传成功
+
+![image-20261001153839654](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/cce3e29e2583f10233026b891603bc86-image-20261001153839654.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261001153939948](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/11fa61c36a9d9f01af744bec6221291f-image-20261001153939948.png)
+
+
+
+**Pass09**
+
+fuzz一下，没发现有用信息。
+
+手工测试，发现 .php::$DATA成功上传且带有 .php 后缀
+
+![image-20261001155025754](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/547c12753a296b8384050d47771a7736-image-20261001155025754.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261001155047217](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/ad2c557de00b585166cff9f28ab6dffa-image-20261001155047217.png)
+
+成功。
+
+![image-20261001155135126](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/135531303a36fab9c3db1a5e95775811-image-20261001155135126.png)
+
+
+
+**Pass10**
+
+fuzz x
+
+手工测试 ， .php. . 成功。
+
+![image-20261001160625170](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/03909c3dbe993c1087bc49286915f0ef-image-20261001160625170.png)
+
+。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261001160643778](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/27902fe4d25cb62edc2a472d22bdc1e4-image-20261001160643778.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261001160730925](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/2b0c493e471b7c66ac825f86b1266d00-image-20261001160730925.png)
