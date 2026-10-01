@@ -117,3 +117,18 @@ exit
 http://xxxxxxxxx:8080/
 ```
 
+
+
+8.下一次启动容器
+
+
+
+```
+docker start upload-labs
+```
+
+
+
+--pikachu：
+
+area39/pikachu

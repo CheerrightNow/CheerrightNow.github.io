@@ -157,7 +157,7 @@ ps：测试的时候最好关掉安全中心的“病毒与威胁保护”设置
 
 ![屏幕截图 2026-09-24 121057](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/24/092a13b9846e8369b8e0c6430580d790-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-24%20121057.png)
 
-emm,貌似没什么用，看看源码，用.htaccess覆盖试试：
+emm，貌似没什么用，看看源码，用.htaccess覆盖试试：
 
 ```
 .htaccess 介绍
@@ -167,9 +167,7 @@ emm,貌似没什么用，看看源码，用.htaccess覆盖试试：
 生效条件：服务器主配置中 AllowOverride 允许相应指令，且通常需 AllowOverride All
 ```
 
--FastCGI 
-
-模式下对应的.htaccess文件写法
+-FastCGI 模式下对应的.htaccess文件写法
 
 ```
 <FilesMatch "\.png$">
@@ -295,3 +293,21 @@ FastCGI模式下（非FastCGI不用这一步）：
 添加.Php后重启Apache就可以了。成功连接。
 
 ![image-20260925120127012](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/25/d29b5086315095364f2021f82b72ddef-image-20260925120127012.png)
+
+
+
+**Pass07**
+
+fuzz一下，没发现有用的东西。
+
+手工尝试，发现空格绕过能够上传。(.php )
+
+![image-20260927114907599](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/27/ceff819916f4742ef3dfacfa8e07c190-image-20260927114907599.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20260927114954089](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/27/4451f0c0eaa0998d59bba6a099ff0629-image-20260927114954089.png)
+
+成功。
+
+![image-20260927115134452](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/27/868fc6ae48a82c5adc5793965a7b94e5-image-20260927115134452.png)
