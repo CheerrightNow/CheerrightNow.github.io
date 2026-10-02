@@ -359,3 +359,102 @@ fuzz x
 。。。。。。。。。。。。。。。。。。。。。。。。
 
 ![image-20261001160730925](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/01/2b0c493e471b7c66ac825f86b1266d00-image-20261001160730925.png)
+
+
+
+**Pass11**
+
+fuzz一下，发现.php之类都能上传，有些奇怪。
+
+看看上传目录，发现“.php”（之类）被过滤，只要有“.php”的话 .php就被删一次。
+
+![屏幕截图 2026-10-02 141720](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/c1552647d8cdb7ff0b65bd057f6cf7b0-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-10-02%20141720.png)
+
+想到双写.php  ->  .pphphp，成功。
+
+![屏幕截图 2026-10-02 142043](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/c8534695abbd919b59e964da3528ba98-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-10-02%20142043.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261002142510817](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/92d41e14e117070c39f35777e219529f-image-20261002142510817.png)
+
+
+
+**Pass12**
+
+**-前提：`php`版本必须低于<`5.3.29`>并且`magic_quotes_gpc`是关闭的**
+
+**-5.3.29死活做不出来，查资料发现5.3.29 虽然仍属于 5.3.x 分支，但它是 5.3.4 之后的补丁版本，核心函数已经对空字节做了处理。**
+
+![image-20261002142838668](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/4b622d322c81af401da89c5d1084d4c7-image-20261002142838668.png)
+
+fuzz一下，没发现有价值的东西。
+
+试了很多方法，发现后缀都是.jpg
+
+![image-20261002151813564](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/991f71482e17ff099d53ebe4657ccf96-image-20261002151813564.png)
+
+白名单验证非常严格，没头绪，看看提示：
+
+![image-20261002162140529](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/09590e9a2c301bab92182b5d18b8f654-image-20261002162140529.png)
+
+从代码可以看到，`img_path`是通过GET请求传递的，因此是可控的，我们可以在`/upload/`后面加入`pass12.php%00`实现截断操作。对于url中的`%00`，服务器会把它当作十六进制处理，进行十六进制解码就变为了`0x00`。
+
+![屏幕截图 2026-10-02 162159](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/f8371f17c028217e7146e6b2f3f7ddf2-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-10-02%20162159.png)
+
+同时将文件名后缀改为.png
+
+![image-20261002162412167](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/5c6b701db552241efa7706b84605b077-image-20261002162412167.png)
+
+成功。
+
+![image-20261002162459227](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/cd7af4e5ebffb7895ebaba3e400ca44d-image-20261002162459227.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261002162531164](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/02/32e992748e8684c4b316e997588fec0f-image-20261002162531164.png)
+
+
+
+--关于为什么要加%00截断：
+
+```
+核心原因：不加 %00，你控制不了最终生成的文件名，PHP 代码就没法执行。
+先看源码的拼接逻辑
+
+$img_path = $_GET['save_path']."/".rand(10, 99).date("YmdHis").".".$file_ext;
+
+最终文件名是四部分拼起来的：
+
+save_path  +  "/"  +  随机数+时间戳  +  "."  +  后缀
+
+假设你传的 save_path = ../upload/，上传的文件是 shell.jpg，那最终路径是：
+
+../upload/32 20261002153000 .jpg
+
+也就是 ../upload/3220261002153000.jpg。
+
+问题来了：文件名中间那段 rand(10,99).date("YmdHis") 是服务器随机生成的，你事先不知道，也控制不了。文件名后缀又是 .jpg。
+
+那保存出来的就是 3220261002153000.jpg，一个图片文件。你直接访问它，PHP 代码不会被执行，因为服务器只对 .php 后缀的文件调用 PHP 解析器。
+
+%00 的作用：把后面多余的部分"切掉"
+
+空字节 \0（%00 解码后的字符）在 C 语言里是字符串结束符。PHP 底层处理路径时，遇到 \0 就认为字符串到此为止。
+
+你传：
+
+save_path = ../upload/pass12.php%00
+
+拼接后，内存里的字符串是：
+
+../upload/pass12.php\0/32 20261002153000 .jpg
+
+move_uploaded_file 读到 \0 就停了，后面的 /32 2026...jpg 全部被丢弃。最终真正保存的路径变成：
+text
+
+../upload/pass12.php
+
+文件名完全由你控制，后缀是 .php。 访问它，服务器就会当 PHP 代码执行。
+```
+
