@@ -1,5 +1,6 @@
 ---
 title: windows-burpsuite监听kali-firefox
+description: 物理机监听虚拟机
 pubDate: 2026-10-01
 tags:
 - burpsuite

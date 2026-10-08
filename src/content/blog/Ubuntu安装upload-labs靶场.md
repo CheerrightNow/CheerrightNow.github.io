@@ -1,5 +1,6 @@
 ---
 title: Ubuntu安装upload-labs靶场
+description: Ubuntu安装upload-labs靶场
 pubDate: 2026-09-26
 tags:
 - Web  

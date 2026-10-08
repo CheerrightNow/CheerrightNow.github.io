@@ -1,5 +1,6 @@
 ---
 title: Metasploit工具启动注意事项
+description: 启动Metasploit的步骤
 pubDate: 2026-09-27
 tags:
 - Linux
